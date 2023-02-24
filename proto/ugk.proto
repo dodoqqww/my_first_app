@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+import "nanopb.proto";
+
+message FxStartUpCfg
+{
+    uint32 color = 1;
+    uint32 load_brightness = 2;
+    uint32 load_speed = 3;
+    bool cooling_en = 4;
+    bool preload_en = 5;
+}
+
+message FxStaticCfg
+{
+    uint32 color = 1;
+}
+
+
+message SetUgkFxReq
+{
+    oneof fx
+    {
+        FxStartUpCfg startup_cfg = 1;
+        FxStaticCfg static_cfg = 2;
+    }
+}
+
+
+message SetUgkFxResp
+{
+    int32 nop = 1;
+}
+
+
+message PixelInfo
+{
+    uint32 rgb = 1;
+    uint32 brightness = 2;
+}
+
+message GetUgkStripsReq
+{
+    int32 nop = 1;
+}
+
+message GetUgkStripsResp
+{
+    repeated PixelInfo driver_side_strip = 1 [(nanopb).max_count = 45];;
+    repeated PixelInfo passenger_side_strip = 2 [(nanopb).max_count = 45];;
+    repeated PixelInfo front_side_strip = 3 [(nanopb).max_count = 32];;
+}
+
+
+message UgkPayload {
+    oneof payload {
+        SetUgkFxReq set_ugk_fx_req = 1;
+        SetUgkFxResp set_ugk_fx_resp = 2;
+        GetUgkStripsReq get_ugk_strips_req = 3;
+        GetUgkStripsResp get_ugk_strips_resp = 4;
+    }
+}
