@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_app/ui/views/home/home_view.dart';
+import 'package:my_first_app/ui/views/settings/settings_view.dart';
 import 'package:stacked/stacked.dart';
 
+import '../admin/admin_view.dart';
 import 'bottom_nav_viewmodel.dart';
 
 class BottomNavView extends StackedView<BottomNavViewModel> {
@@ -28,6 +30,11 @@ class BottomNavView extends StackedView<BottomNavViewModel> {
             icon: Icon(Icons.bookmark_border),
             label: 'MyPoints',
           ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.access_alarm),
+            icon: Icon(Icons.access_alarms_outlined),
+            label: 'MyPoints',
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -42,6 +49,10 @@ class BottomNavView extends StackedView<BottomNavViewModel> {
     switch (index) {
       case 0:
         return const HomeView();
+      case 1:
+        return const SettingsView();
+      case 2:
+        return const AdminView();
     }
     return const Text("No widget");
   }

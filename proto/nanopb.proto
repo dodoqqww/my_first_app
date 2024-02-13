@@ -5,6 +5,8 @@
 // These are used by nanopb to generate statically allocable structures
 // for memory-limited environments.
 
+//protoc --dart_out=./lib/ -I ./proto/nanopb.proto  .\proto\ugk.proto
+
 syntax = "proto2";
 import "google/protobuf/descriptor.proto";
 

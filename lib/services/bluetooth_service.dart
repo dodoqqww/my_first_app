@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:typed_data';
 
+import 'package:flutter_ble_lib_ios_15/flutter_ble_lib.dart';
 import 'package:my_first_app/proto/ugk.pb.dart';
 import 'package:my_first_app/services/provision/esp_prov.dart';
-import 'package:my_first_app/services/provision/security_ble.dart';
+import 'package:my_first_app/services/provision/security0.dart';
+import 'package:my_first_app/services/provision/security1.dart';
 import 'package:my_first_app/services/provision/transport_ble.dart';
 //import 'package:flutter_blue/flutter_blue.dart' as external1;
 
@@ -37,20 +40,39 @@ class BluetoothService {
 
     // test
     prov = EspProv(
-        transport: TransportBLE(scanResult.peripheral),
-        security: SecurityBLE(pop: 'abcd1234'));
+        transport: TransportBLE(scanResult.peripheral), security: Security0());
 
-    await prov!.establishSession(sec1: false);
+    await prov!.establishSession();
 
     return prov!;
   }
 
   void sendData() async {
-    List<int> asd = await prov!.sendReceiveUgkData(
+    Uint8List asd = await prov!.sendReceiveUgkData(
         UgkPayload(getUgkStripsReq: GetUgkStripsReq.getDefault())
             .writeToBuffer());
 
-    GetUgkStripsResp asd3 = GetUgkStripsResp.fromBuffer(asd);
+    UgkPayload asd3 = UgkPayload.fromBuffer(asd);
+
+    print(asd3);
+  }
+
+  void sendColorData(int brightness, int rgb) async {
+    Uint8List asd = await prov!.sendReceiveUgkData(UgkPayload(
+            setUgkColorReq: SetUgkColorReq(brightness: brightness, rgb: rgb))
+        .writeToBuffer());
+
+    UgkPayload asd3 = UgkPayload.fromBuffer(asd);
+
+    print(asd3);
+  }
+
+  void sendColorDataRgb(int rgb) async {
+    Uint8List asd = await prov!.sendReceiveUgkData(
+        UgkPayload(setRgbCorretorReq: SetRgbCorrectorReq(rgbcorrector: rgb))
+            .writeToBuffer());
+
+    UgkPayload asd3 = UgkPayload.fromBuffer(asd);
 
     print(asd3);
   }

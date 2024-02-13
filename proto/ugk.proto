@@ -51,6 +51,27 @@ message GetUgkStripsResp
     repeated PixelInfo front_side_strip = 3 [(nanopb).max_count = 32];;
 }
 
+message SetUgkColorReq
+{
+    uint32 rgb = 1;
+    int32 brightness = 2;
+}
+
+message SetUgkColorResp
+{
+    int32 rgb = 1;    
+}
+
+message SetRgbCorrectorReq
+{
+    uint32 rgbcorrector = 1;
+}
+
+message SetRgbCorrectorResp
+{
+    int32 nop = 1;
+}
+
 
 message UgkPayload {
     oneof payload {
@@ -58,5 +79,9 @@ message UgkPayload {
         SetUgkFxResp set_ugk_fx_resp = 2;
         GetUgkStripsReq get_ugk_strips_req = 3;
         GetUgkStripsResp get_ugk_strips_resp = 4;
+        SetUgkColorReq set_ugk_color_req = 5;
+        SetUgkColorResp set_ugk_color_resp = 6;
+        SetRgbCorrectorReq set_rgb_corretor_req = 7;
+        SetRgbCorrectorResp set_rgb_corretor_resp = 8;
     }
 }

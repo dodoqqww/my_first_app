@@ -6,6 +6,8 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:my_first_app/ui/views/bottom_nav/bottom_nav_view.dart';
 import 'package:my_first_app/ui/bottom_sheets/connection/connection_sheet.dart';
+import 'package:my_first_app/ui/views/settings/settings_view.dart';
+import 'package:my_first_app/ui/views/admin/admin_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -13,6 +15,8 @@ import 'package:my_first_app/ui/bottom_sheets/connection/connection_sheet.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: BottomNavView),
+    MaterialRoute(page: SettingsView),
+    MaterialRoute(page: AdminView),
 // @stacked-route
   ],
   dependencies: [
